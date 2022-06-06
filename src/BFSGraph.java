@@ -12,11 +12,11 @@
 
 //Queue //for unweighted graphs
 
-public class BFSGraph {
+public class BFSGraph<T> {
 
     private int numberofVertices;
-    private MyLinkedList<Integer>[] adjacencyList;
-    private MyQueue<Integer> queue;
+    private MyLinkedList<Vertex<T>>[] adjacencyList;
+    private MyQueue<Vertex<T>> queue;
 
 
 
@@ -30,18 +30,18 @@ public class BFSGraph {
         queue = new MyQueue<>();
     }
 
-    public void insertEdge(int vertex, int neighbor){
+    public void insertEdge(Vertex<T> vertex, Vertex<T> neighbor){
         /* adding an edge to the adjacency list (edges are bidirectional in this example) */
-        adjacencyList[vertex].add(neighbor);
+        adjacencyList[vertex.getIndex()].add(neighbor);
 
     }
 
-    public void BFS(int root)
+    public void BFS(Vertex<T> root)
     {
         /* initialize boolean array for holding the data */
         boolean[] vertexVisited = new boolean[numberofVertices];
-        int visiting =0;
-        vertexVisited[root] = true;
+        Vertex<T> visiting;
+        vertexVisited[root.getIndex()] = true;
 
         /* root node is added to the top of the queue */
         queue.enqueue(root);
@@ -52,11 +52,11 @@ public class BFSGraph {
             System.out.print(root + " ");
 
             /* iterate through the linked list and push all neighbors into queue */
-            for(int i =0; i<adjacencyList[root].getSize();i++){
-                visiting= adjacencyList[root].get(i);
+            for(int i =0; i<adjacencyList[root.getIndex()].getSize();i++){
+                visiting= adjacencyList[root.getIndex()].get(i);
                 /* only insert nodes into queue if they have not been explored already */
-                if(!vertexVisited[visiting]){
-                    vertexVisited[visiting] = true;
+                if(!vertexVisited[visiting.getIndex()]){
+                    vertexVisited[visiting.getIndex()] = true;
                     queue.enqueue(visiting);
                 }
             }
@@ -67,20 +67,20 @@ public class BFSGraph {
     public static void main(String[] args) {
 
         BFSGraph graph = new BFSGraph(6);
-        graph.insertEdge(0, 1);
-        graph.insertEdge(0, 3);
-        graph.insertEdge(0, 4);
-        graph.insertEdge(4, 5);
-        graph.insertEdge(3, 5);
-        graph.insertEdge(1, 2);
-        graph.insertEdge(1, 0);
-        graph.insertEdge(2, 1);
-        graph.insertEdge(4, 1);
-        graph.insertEdge(3, 1);
-        graph.insertEdge(5, 4);
-        graph.insertEdge(5, 3);
+        graph.insertEdge(new Vertex<>("Kuantan",0), new Vertex<>("Perlis", 1));
+        graph.insertEdge(new Vertex<>("Kuantan",0), new Vertex<>("Perak", 3));
+        graph.insertEdge(new Vertex<>("Kuantan",0), new Vertex<>("Korea", 4));
+        graph.insertEdge(new Vertex<>("Korea", 4), new Vertex<>("Japan", 5));
+        graph.insertEdge(new Vertex<>("Perak", 3),  new Vertex<>("Japan", 5));
+        graph.insertEdge(new Vertex<>("Perlis", 1), new Vertex<>("Kedah", 2));
+        graph.insertEdge(new Vertex<>("Perlis", 1), new Vertex<>("Kuantan",0));
+        graph.insertEdge(new Vertex<>("Kedah", 2),  new Vertex<>("Perlis", 1));
+        graph.insertEdge(new Vertex<>("Korea", 4), new Vertex<>("Perlis", 1));
+        graph.insertEdge(new Vertex<>("Perak", 3), new Vertex<>("Perlis", 1));
+        graph.insertEdge( new Vertex<>("Japan", 5), new Vertex<>("Korea", 4));
+        graph.insertEdge( new Vertex<>("Japan", 5), new Vertex<>("Perak", 3));
         System.out.println("Breadth First Traversal for the graph is:");
-        graph.BFS(0);
+        graph.BFS(new Vertex<>("Kuantan",0));
     }
 
 
