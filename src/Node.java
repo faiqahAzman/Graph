@@ -1,4 +1,4 @@
-package Graph;
+
 
 public class Node<E> {
     E element;

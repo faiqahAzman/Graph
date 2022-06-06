@@ -2,11 +2,11 @@
  * Reference
  * https://devwithus.com/implement-linked-list-java/
  */
-package Graph;
 
-import Graph.Node;
 
-public class MyLinkedList<E> implements lab4.question1.MyLinkedListAbstract<E> {
+
+
+public class MyLinkedList<E> implements MyLinkedListAbstract<E> {
 
     private Node<E> head =null;
     private Node<E> tail = null;

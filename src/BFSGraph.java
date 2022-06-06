@@ -1,4 +1,4 @@
-package Graph;
+
 
 //1. Take the data for the graph's adjacency matrix or adjacency list.
 //2. Create a queue and fill it with items.
@@ -15,7 +15,7 @@ package Graph;
 public class BFSGraph {
 
     private int numberofVertices;
-    private MyLinkedList<Integer> adjacencyList[];
+    private MyLinkedList<Integer>[] adjacencyList;
     private MyQueue<Integer> queue;
 
 
@@ -27,7 +27,7 @@ public class BFSGraph {
         for (int index=0; index<numberofVertices; index++){
             adjacencyList[index] = new MyLinkedList<>();
         }
-        queue = new MyQueue<Integer>();
+        queue = new MyQueue<>();
     }
 
     public void insertEdge(int vertex, int neighbor){
@@ -39,7 +39,7 @@ public class BFSGraph {
     public void BFS(int root)
     {
         /* initialize boolean array for holding the data */
-        boolean vertexVisited[] = new boolean[numberofVertices];
+        boolean[] vertexVisited = new boolean[numberofVertices];
         int visiting =0;
         vertexVisited[root] = true;
 
